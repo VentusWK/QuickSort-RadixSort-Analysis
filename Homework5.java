@@ -6,7 +6,7 @@ class Homework5
 {
     public static long[] data = new long[10000000];
     // Checks if array is properly ordered
-    public static boolean isOrdered(int arr[])
+    public static boolean isOrdered(long arr[])
     {
         for(int i = 1; i < arr.length; i++)
         {
@@ -18,7 +18,7 @@ class Homework5
     
     public static int findBaseNDigit(long num, int n, int exp)
     {
-        return (int)(num / (long) Math.pow(n, exp)) % n;
+        return (int)((num / (long) Math.pow(n, exp)) % n);
     }
 
     public static long[] radixSort(long arr[], int n)
@@ -30,16 +30,14 @@ class Homework5
             A[i] = arr[i];
         }
 
-        // Only iterates 3 times since log_n(n^2.7) = 2.7.
-        // The largest value in the valid set can't have more than 3 digits in base n after we take log_n of it.
-        for(int exp = 0; exp <= 2; exp++)
+        for(int exp = 0; exp <= 3; exp++)
         {
             // Counting sort
             int[] C = new int[n];
 
             for(int i = 0; i < n; i++)
             {
-                C[findBaseNDigit(A[i], n, exp)] += 1;
+                C[findBaseNDigit(A[i], 256, exp)] += 1;
             }
 
             for(int i = 1; i < n; i++)
@@ -49,8 +47,8 @@ class Homework5
 
             for(int i = n - 1; i >= 0; i--)
             {
-                B[C[findBaseNDigit(A[i], n, exp)] - 1] = A[i];
-                C[findBaseNDigit(A[i], n, exp)] -= 1;
+                B[C[findBaseNDigit(A[i], 256, exp)] - 1] = A[i];
+                C[findBaseNDigit(A[i], 256, exp)] -= 1;
             }
 
             for(int i = 0; i < n; i++)
@@ -76,11 +74,7 @@ class Homework5
                     data[i++] = reader.nextLong();
                 }
                 reader.close();
-                radixSort(data, 10000000);
-                for(int j = 0; j < data.length; j++)
-                {
-                    System.out.println(data[j]);
-                }
+                System.out.println(isOrdered(radixSort(data, data.length)));
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred. Can't create file.");
                 e.printStackTrace();
