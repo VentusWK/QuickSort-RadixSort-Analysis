@@ -4,15 +4,26 @@ import java.io.IOException;
 import java.util.Scanner;
 class Homework5
 {
-    public static int findBaseNDigit(int num, int n, int exp)
+    // Checks if array is properly ordered
+    public static boolean isOrdered(int arr[])
     {
-        return (num / (int) Math.pow(n, exp)) % n;
+        for(int i = 1; i < arr.length; i++)
+        {
+            if(arr[i] < arr[i-1])
+                return false;
+        }
+        return true;
+    }
+    
+    public static int findBaseNDigit(long num, int n, int exp)
+    {
+        return (int)(num / (long) Math.pow(n, exp)) % n;
     }
 
-    public static int[] radixSort(int arr[], int n)
+    public static long[] radixSort(long arr[], int n)
     {
-        int[] A = new int[n];
-        int[] B = new int[n];
+        long[] A = new long[n];
+        long[] B = new long[n];
         for(int i = 0; i < n; i++)
         {
             A[i] = arr[i];
@@ -54,16 +65,20 @@ class Homework5
         if(args.length > 0)
         {
             try {
-                File myObj = new File(args[0]);
-                Scanner myReader = new Scanner(myObj);
-                while (myReader.hasNextLine()) {
-                    String data = myReader.nextLine();
-                    System.out.println(data);
+                System.out.println(args[0]);
+                File inputFile = new File(args[0]);
+                Scanner reader = new Scanner(inputFile);
+
+                long[] data = new long[10000000];
+                int i = 0;
+                while(reader.hasNextLong())
+                {
+                    System.out.println(reader.nextLong());
                 }
-                myReader.close();
+                reader.close();
             } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+                System.out.println("An error occurred. Can't create file.");
+                e.printStackTrace();
             }
             try {
                 File outputFile = new File(args[1]);
