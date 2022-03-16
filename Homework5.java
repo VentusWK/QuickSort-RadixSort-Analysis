@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 class Homework5
 {
+    public static long[] data = new long[10000000];
     // Checks if array is properly ordered
     public static boolean isOrdered(int arr[])
     {
@@ -69,13 +70,17 @@ class Homework5
                 File inputFile = new File(args[0]);
                 Scanner reader = new Scanner(inputFile);
 
-                long[] data = new long[10000000];
                 int i = 0;
                 while(reader.hasNextLong())
                 {
-                    System.out.println(reader.nextLong());
+                    data[i++] = reader.nextLong();
                 }
                 reader.close();
+                radixSort(data, 10000000);
+                for(int j = 0; j < data.length; j++)
+                {
+                    System.out.println(data[j]);
+                }
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred. Can't create file.");
                 e.printStackTrace();
@@ -93,6 +98,5 @@ class Homework5
                 e.printStackTrace();
             }
         }
-
     }
 }
