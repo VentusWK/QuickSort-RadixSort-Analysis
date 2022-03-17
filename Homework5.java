@@ -29,7 +29,7 @@ class Homework5
         long[] A = new long[n];
         long[] B = new long[n];
 
-        // Make A a copy of arr
+        // Make A refer to arr
         A = arr;
 
         // Only iterates 4 times since 2^32 numbers can be represented with 4 radices in base 256
