@@ -36,14 +36,14 @@ class Homework5
         for(int exp = 0; exp <= 3; exp++)
         {
             // Counting sort
-            int[] C = new int[n];
+            int[] C = new int[256];
 
             for(int i = 0; i < n; i++)
             {
                 C[findBaseNDigit(A[i], 256, exp)] += 1;
             }
 
-            for(int i = 1; i < n; i++)
+            for(int i = 1; i < 256; i++)
             {
                 C[i] += C[i-1];
             }
